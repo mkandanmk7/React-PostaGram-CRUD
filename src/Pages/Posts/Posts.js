@@ -44,7 +44,7 @@ export default function Posts() {
               </p>
               <p className="text-muted">{post.body}</p>
               <div>
-                <button className="btn btn-success mx-2" onClick="">
+                <button className="btn btn-success mx-2" onClick={() => {}}>
                   Update
                 </button>
                 <button
