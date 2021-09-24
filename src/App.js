@@ -1,7 +1,7 @@
 // import Switch from "react-bootstrap/esm/Switch";
-import { BrowserRouter, Link, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-import { Navbar } from "./Components/Navbar/Navbar";
+import { HeadNav } from "./Components/Navbar/Navbar";
 import About from "./Pages/About/About";
 import Home from "./Pages/Home/Home";
 import Posts from "./Pages/Posts/Posts";
@@ -9,13 +9,16 @@ import Posts from "./Pages/Posts/Posts";
 function App() {
   return (
     <div className="App">
-      <h2 className="btn btn-dark ">Welcome to Postagram</h2>
+      {/* <h2 className="btn btn-dark ">Welcome to Postagram</h2> */}
       <BrowserRouter>
-        <Navbar />
+        <HeadNav />
         <Switch>
-          <Link exact path="/" component={Home} />
-          <Link path="/posts" component={Posts} />
-          <Link path="/about" component={About} />
+          <Route exact path="/" component={Home} />
+          <Route path="/posts" component={Posts} />
+          <Route path="/about" component={About} />
+          <Route path="/home">
+            <Redirect to="/" />
+          </Route>
         </Switch>
       </BrowserRouter>
     </div>
