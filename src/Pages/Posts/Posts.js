@@ -17,6 +17,13 @@ export default function Posts() {
 
   const deletePost = async (id) => {
     console.log(id, "deleted");
+    // let tempPosts = [...posts];
+    // tempPosts = tempPosts.filter((tPost) => tPost.id !== id setPosts(tempPosts));
+    const { data: deleteData } = await axios.delete(`${url}/posts/${id}`);
+    console.log(deleteData);
+    let deleted = [...posts];
+    deleted = deleted.filter((d) => d.id !== id);
+    setPosts(deleted);
   };
 
   // COMPONENT DID MOUNT()
