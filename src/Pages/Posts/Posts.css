@@ -1,3 +1,18 @@
 .mt {
   margin-top: 80px;
 }
+.body {
+  width: 400px;
+  background: #f0f0f0;
+  margin-top: 20px;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px;
+}
+.postid {
+  margin-right: 280px;
+  width: 100px;
+  padding: 5px;
+  border: 1px solid #fff;
+  background: #acd;
+  border-radius: 4px;
+}

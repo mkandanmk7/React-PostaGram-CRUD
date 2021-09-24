@@ -6,29 +6,31 @@ import "./Navbar.css";
 
 export const HeadNav = () => {
   return (
-    <Navbar bg="dark" className="stick" varient="primary">
-      <Container>
-        <Link to="/">
-          <FaHome className="text-white" />
-        </Link>
-        <NavLink
-          className="link"
-          activeClassName="selected"
-          exaxt
-          to="/"
-        ></NavLink>
-        <Nav className="ms-auto">
-          <NavLink activeClassName="active" className="link" to="/Home">
-            Home
-          </NavLink>
-          <NavLink activeClassName="active" className="link" to="/Posts">
-            Posts
-          </NavLink>
-          <NavLink activeClassName="active" className="link" to="/About">
-            About
-          </NavLink>
-        </Nav>
-      </Container>
-    </Navbar>
+    <div className="stick">
+      <Navbar bg="dark" varient="primary">
+        <Container>
+          <Link to="/">
+            <FaHome className="text-white" />
+          </Link>
+          <NavLink
+            className="link"
+            activeClassName="selected"
+            exaxt
+            to="/"
+          ></NavLink>
+          <Nav className="ms-auto">
+            <NavLink activeClassName="active" className="link" to="/Home">
+              Home
+            </NavLink>
+            <NavLink activeClassName="active" className="link" to="/Posts">
+              Posts
+            </NavLink>
+            <NavLink activeClassName="active" className="link" to="/About">
+              About
+            </NavLink>
+          </Nav>
+        </Container>
+      </Navbar>
+    </div>
   );
 };
