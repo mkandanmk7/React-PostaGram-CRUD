@@ -40,13 +40,17 @@ export default function Posts() {
   //create post
 
   let createPost = async () => {
-    const { data: post } = await axios.post(`${url}/posts`, {
-      userId: userId,
-      title: title,
-      body: body,
-    });
+    const { data } = await axios.post(
+      "https://jsonplaceholder.typicode.com/posts",
+      {
+        userId: userId,
+        title: title,
+        body: body,
+      }
+    );
+    console.log("created");
     let tempPosts = [...posts];
-    tempPosts.push(post);
+    tempPosts.push(data);
     setPosts(tempPosts);
     setUserId(""); // empty input after adding post
     setTitle("");
