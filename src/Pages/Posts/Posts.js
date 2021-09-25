@@ -63,7 +63,7 @@ export default function Posts() {
           >
             Add Post
           </button>
-          <div id="form" className="collapse">
+          <div id="form" className="collapse m-3">
             <div className="container">
               <form>
                 <div className="container">

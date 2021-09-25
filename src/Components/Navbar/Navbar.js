@@ -7,7 +7,7 @@ import "./Navbar.css";
 export const HeadNav = () => {
   return (
     <div className="stick">
-      <Navbar bg="dark" varient="primary">
+      <Navbar bg="success" varient="danger">
         <Container>
           <Link to="/">
             <FaHome className="text-white" />
@@ -34,3 +34,30 @@ export const HeadNav = () => {
     </div>
   );
 };
+
+// import React from "react";
+// import "./Navbar.css";
+// import { Container, Nav, Navbar } from "react-bootstrap";
+// import { NavLink } from "react-router-dom";
+
+// export const HeadNav = () => {
+//   return (
+//     <div>
+//       <Navbar bg="success" variant="light">
+//         <Container>
+//           <Nav className="ms-auto">
+//             <NavLink activeClassName="active" className="link" to="/home">
+//               Home
+//             </NavLink>
+//             <NavLink activeClassName="active" className="link" to="/posts">
+//               Posts
+//             </NavLink>
+//             <NavLink activeClassName="active" className="link" to="/about">
+//               About
+//             </NavLink>
+//           </Nav>
+//         </Container>
+//       </Navbar>
+//     </div>
+//   );
+// };
