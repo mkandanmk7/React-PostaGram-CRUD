@@ -84,7 +84,7 @@ export default function Posts() {
   };
 
   const handleSubmit = (event) => {
-    event.prevent.default();
+    event.preventDefault();
 
     if (id === "") {
       createPost();
@@ -155,7 +155,7 @@ export default function Posts() {
               data-target="#form"
               data-toggle="collapse"
               type="button"
-              onChange={handleSubmit}
+              onClick={handleSubmit}
               className="btn btn-success m-3"
             >
               submit
