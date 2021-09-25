@@ -8,20 +8,20 @@ export default function Posts() {
   const [users, setUsers] = useState([]);
 
   // form data initialization;
+  const [id, setId] = useState("");
+  const [userId, setUserId] = useState("");
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
 
-  //getPost
+  //getPost , getUsers
   const getPosts = async () => {
     let { data } = await axios.get(`${url}/posts`);
-    console.log(data);
+    let { data: userData } = await axios.get(`${url}/users`);
+
+    console.log(data); // post data
+    console.log(userData); // user data
     setPosts(data);
-  };
-
-  //get users details;
-
-  const getUsers = async () => {
-    let { data: user } = await axios.get(`${url}/users`);
-    setUsers(users);
-    console.log(user);
+    setUsers(userData);
   };
 
   // delete post;
@@ -41,14 +41,60 @@ export default function Posts() {
   useEffect(() => {
     console.log("Mounted");
     getPosts();
-    getUsers();
+    // getUsers();
   }, []);
+
+  const handleChange = (event) => {
+    if (event.target.name === "userId") {
+      setUserId(event.target.value);
+    }
+  };
 
   return (
     <>
-      <div className="mt">
+      <div className="mt container">
         <h2 className="bg-primary text-danger ">Welcome to Posts </h2>
         <div>
+          <h2>All posts</h2>
+          <button
+            className="btn btn-dark"
+            data-toggle="collapse"
+            data-target="#form"
+          >
+            Add Post
+          </button>
+          <div id="form" className="collapse">
+            <div className="container">
+              <form>
+                <div className="container">
+                  <select className="form-control">
+                    {users.map((userName) => {
+                      return (
+                        <option key={userName.id} value={userName.id}>
+                          {userName.username}
+                        </option>
+                      );
+                    })}
+                  </select>
+                  <div className="d-flex m-2">
+                    <label className="form-group">user Id</label>
+                    <input type="text" className="form-control"></input>
+                    <label className="form-group">E-mail</label>
+                    <input type="email" className="form-control"></input>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <button
+              data-target="#form"
+              data-toggle="collapse"
+              onChange={handleChange}
+            >
+              submit
+            </button>
+          </div>
+        </div>
+        {/* <div>
           <button
             className="btn btn-success"
             data-toggle="collapse"
@@ -57,7 +103,27 @@ export default function Posts() {
             Add Post
           </button>
         </div>
-        <div id="clps" className="c">
+        <div id="clps" className="panel-body collapse">
+          <form>
+            <div className="form-group">
+              <select
+                className="form-control"
+                name="userId"
+                value={userId}
+                onChange={handleChange}
+              >
+                {users.map((user) => {
+                  return (
+                    <option key={user.id} value={user.id}>
+                      {user.name}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </form>
+        </div> */}
+        {/* <div id="clps" className="c">
           <h3>Create Post</h3>
           <hr />
           <div className="bg-info p-3">
@@ -85,9 +151,15 @@ export default function Posts() {
 
             <textarea className="m-3" type="textarea"></textarea>
 
-            <button className="btn btn-success">Submit</button>
+            <button
+              className="btn btn-success"
+              data-target="#clps"
+              data-toggle="collapse"
+            >
+              Submit
+            </button>
           </div>
-        </div>
+        </div> */}
         <div className="container">
           {posts.map((post) => {
             return (

@@ -2,7 +2,7 @@ import React from "react";
 
 export default function About() {
   return (
-    <div>
+    <div className="mt">
       <h2 className="bg-success text-info">Welcome to About</h2>
       <p>
         lorem Definition of text (Entry 1 of 2) 1a(1): the original words and
