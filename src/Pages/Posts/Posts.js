@@ -37,6 +37,22 @@ export default function Posts() {
     setPosts(deleted);
   };
 
+  //create post
+
+  let createPost = async () => {
+    const { data: post } = await axios.post(`${url}/posts`, {
+      userId: userId,
+      title: title,
+      body: body,
+    });
+    let tempPosts = [...posts];
+    tempPosts.push(post);
+    setPosts(tempPosts);
+    setUserId(""); // empty input after adding post
+    setTitle("");
+    setBody("");
+  };
+
   // COMPONENT DID MOUNT()
   useEffect(() => {
     console.log("Mounted");
@@ -44,10 +60,34 @@ export default function Posts() {
     // getUsers();
   }, []);
 
-  const handleChange = (event) => {
-    if (event.target.name === "userId") {
-      setUserId(event.target.value);
+  let updateForm = (post) => {
+    setId(post.id);
+    setUserId(post.userId);
+    setTitle(post.title);
+    setBody(post.body);
+  };
+
+  const handleChange = ({ target: { name, value } }) => {
+    if (name === "userId") {
+      setUserId(value);
     }
+    if (name === "title") {
+      setTitle(value);
+    }
+    if (name === "body") {
+      setBody(value);
+    }
+  };
+
+  const handleSubmit = (event) => {
+    event.prevent.default();
+
+    if (id === "") {
+      createPost();
+    }
+    //  else {
+    //   updatePost();
+    // }
   };
 
   return (
@@ -57,16 +97,19 @@ export default function Posts() {
         <div>
           <h2>All posts</h2>
           <button
-            className="btn btn-dark"
+            className="btn btn-danger "
             data-toggle="collapse"
             data-target="#form"
           >
             Add Post
           </button>
-          <div id="form" className="collapse m-3">
+          <div id="form" className="container bg-info p-3 collapse m-3 ">
             <div className="container">
               <form>
                 <div className="container">
+                  <label className="ml">
+                    <b>User Name</b>
+                  </label>
                   <select className="form-control">
                     {users.map((userName) => {
                       return (
@@ -76,11 +119,30 @@ export default function Posts() {
                       );
                     })}
                   </select>
-                  <div className="d-flex m-2">
-                    <label className="form-group">user Id</label>
-                    <input type="text" className="form-control"></input>
-                    <label className="form-group">E-mail</label>
-                    <input type="email" className="form-control"></input>
+                  <div className="form-group">
+                    <label className="ml">
+                      <b>Title :</b>
+                    </label>
+                    <input
+                      type="text"
+                      className="form-control"
+                      name="title"
+                      value={title}
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label className="ml">
+                      <b>Description </b>
+                    </label>
+                    <textarea
+                      className="form-control"
+                      name="body"
+                      value={body}
+                      rows={5}
+                      cols={30}
+                      onChange={handleChange}
+                    ></textarea>
                   </div>
                 </div>
               </form>
@@ -88,9 +150,19 @@ export default function Posts() {
             <button
               data-target="#form"
               data-toggle="collapse"
-              onChange={handleChange}
+              type="button"
+              onChange={handleSubmit}
+              className="btn btn-success m-3"
             >
               submit
+            </button>
+            <button
+              data-target="#form"
+              data-toggle="collapse"
+              type="button"
+              className="btn btn-danger m-3"
+            >
+              Close
             </button>
           </div>
         </div>
@@ -177,7 +249,12 @@ export default function Posts() {
                 <p className="text-muted">{post.body}</p>
                 <div>
                   <hr />
-                  <button className="btn btn-success mx-2" onClick={() => {}}>
+                  <button
+                    className="btn btn-success mx-2"
+                    data-toggle="collapse"
+                    data-target="#clps"
+                    onClick={() => updateForm(post)}
+                  >
                     Update
                   </button>
                   <button
